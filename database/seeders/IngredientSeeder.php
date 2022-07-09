@@ -5,8 +5,12 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Database\Seeders\Traits\TruncateTable;
+use Database\Seeders\Traits\DisableForeginKeys;
+
 class IngredientSeeder extends Seeder
 {
+    use TruncateTable, DisableForeginKeys;
     /**
      * Run the database seeds.
      *
@@ -14,6 +18,8 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $this->disableForeignKeys();
+        $this->truncate('ingredients');
+        $this->enableForeignKeys();
     }
 }

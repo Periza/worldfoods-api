@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('meals', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
             $table->string('status');
             // Foreign key, Meal is a child of Category, can be nullable
             $table->foreignId('category_id')->nullable();

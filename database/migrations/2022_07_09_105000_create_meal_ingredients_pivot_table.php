@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('meal_tags', function(Blueprint $table) {
+        Schema::create('meal_ingredient', function(Blueprint $table) {
             $table->foreignId('meal_id')->index();
             $table->foreign('meal_id')->on('meals')->references('id');
-            $table->foreignId('tag_id')->index();
-            $table->foreign('tag_id')->on('tags')->references('id');
-            $table->primary(['meal_id', 'tag_id']);
+            $table->foreignId('ingredient_id')->index();
+            $table->foreign('ingredient_id')->on('ingredients')->references('id');
+            $table->primary(['meal_id', 'ingredient_id']);
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meal_tags');
+        Schema::dropIfExists('meal_ingredient');
     }
 };
