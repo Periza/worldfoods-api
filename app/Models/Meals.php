@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-// Meal can can have only one category.
-// Categories can have multiple meals.
 
-class Meals extends Model
+
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
+
+class Meals extends Model implements TranslatableContract
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Translatable;
+
+    public $translatedAttributes = ['title', 'description'];
 }
