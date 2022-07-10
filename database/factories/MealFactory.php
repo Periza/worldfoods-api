@@ -24,7 +24,7 @@ class MealFactory extends Factory
         return [
             'created_at' => $start,
             'updated_at' => $this->faker->dateTimeBetween($start, 'now +7 days'),
-            'category_id' => random_int(1,100)
+            'category_id' => random_int(1,15)
         ];
     }
 }

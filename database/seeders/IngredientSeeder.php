@@ -21,7 +21,7 @@ class IngredientSeeder extends Seeder
     {
         $this->disableForeignKeys();
         $this->truncate('ingredients');
-        Ingredient::factory()->count(200)->create();
+        Ingredient::factory()->count(100)->create();
         $this->enableForeignKeys();
     }
 }
