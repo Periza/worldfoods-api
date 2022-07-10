@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ingredient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +21,7 @@ class IngredientSeeder extends Seeder
     {
         $this->disableForeignKeys();
         $this->truncate('ingredients');
+        Ingredient::factory()->count(200)->create();
         $this->enableForeignKeys();
     }
 }

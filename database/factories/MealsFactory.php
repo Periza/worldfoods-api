@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MealsFactory extends Factory
 {
+    protected $model = Meal::class;
     /**
      * Define the model's default state.
      *
@@ -16,8 +17,10 @@ class MealsFactory extends Factory
      */
     public function definition()
     {
+        // Start date for creation
+        $start = $this->faker->dateTimeBetween('now -7 days', 'now');
         return [
-            //
+            'created_at' => $start,
         ];
     }
 }

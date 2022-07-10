@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 use Database\Seeders\Traits\TruncateTable;
 use Database\Seeders\Traits\DisableForeginKeys;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TagSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class TagSeeder extends Seeder
     {
         $this->disableForeignKeys();
         $this->truncate('tags');
+        Tag::factory()->count(15)->create();
         $this->enableForeignKeys();
     }
 }

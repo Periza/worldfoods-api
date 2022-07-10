@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('meals', function (Blueprint $table) {
-            $table->id();
-            $table->string('status');
+            $table->bigIncrements('id');
             // Foreign key, Meal is a child of Category, can be nullable
             $table->foreignId('category_id')->nullable();
             $table->foreign('category_id')->on('categories')->references('id');

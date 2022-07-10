@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Database\Seeders\Traits\TruncateTable;
 use Database\Seeders\Traits\DisableForeginKeys;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class CategorySeeder extends Seeder
         $this->disableForeignKeys();
         // Truncate table
         $this->truncate('categories');
+        Category::factory()->count(20)->create();
         $this->enableForeignKeys();
     }
 }

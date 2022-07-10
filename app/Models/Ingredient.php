@@ -12,5 +12,7 @@ class Ingredient extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
+    
+    public $timestamps = false;
     public $translatedAttributes = ['title'];
 }

@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('meal_tags', function(Blueprint $table) {
-            $table->foreignId('meal_id')->index();
+        Schema::create('meal_tag', function(Blueprint $table) {
+             $table->foreignId('meal_id')->index();
             $table->foreign('meal_id')->on('meals')->references('id');
             $table->foreignId('tag_id')->index();
             $table->foreign('tag_id')->on('tags')->references('id');

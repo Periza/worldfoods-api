@@ -12,5 +12,12 @@ class Tag extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
+    public $fillable = ['slug'];
+
     public $translatedAttributes = ['title'];
+    public $timestamps = false;
+
+    public function posts() {
+        return $this->belongsToMany(Meal::class, 'meal_tag', 'tag_id', 'meal_id');
+    }
 }

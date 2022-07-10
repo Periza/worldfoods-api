@@ -11,9 +11,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class Meals extends Model implements TranslatableContract
+class Meal extends Model implements TranslatableContract
 {
     use HasFactory, SoftDeletes, Translatable;
 
     public $translatedAttributes = ['title', 'description'];
+
+    public $fillable = ['status'];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class, 'meal_tag', 'meal_id', 'tag_id');
+    }
 }
