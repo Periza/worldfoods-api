@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CategorySeeder::class);
         $this->call(IngredientSeeder::class);
-        $this->call(MealsSeeder::class);
         $this->call(TagSeeder::class);
+        $this->call(MealSeeder::class);
     }
 }

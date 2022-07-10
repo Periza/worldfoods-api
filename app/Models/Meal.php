@@ -26,4 +26,8 @@ class Meal extends Model implements TranslatableContract
     public function tags() {
         return $this->belongsToMany(Tag::class, 'meal_tag', 'meal_id', 'tag_id');
     }
+
+    public function ingredients() {
+        return $this->belongsToMany(Ingredient::class, 'meal_ingredient', 'meal_id', 'inredient_id');
+    }
 }

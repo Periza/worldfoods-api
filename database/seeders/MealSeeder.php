@@ -2,13 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Meal;
 use Illuminate\Database\Seeder;
 
 use Database\Seeders\Traits\TruncateTable;
 use Database\Seeders\Traits\DisableForeginKeys;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class MealsSeeder extends Seeder
+
+class MealSeeder extends Seeder
 {
 
     use TruncateTable, DisableForeginKeys;
@@ -22,6 +24,7 @@ class MealsSeeder extends Seeder
     {
         $this->disableForeignKeys();
         $this->truncate('meals');
+        Meal::factory()->count(50)->create();
         $this->enableForeignKeys();
     }
 }
