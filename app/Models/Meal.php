@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
 class Meal extends Model implements TranslatableContract
 {
@@ -17,7 +18,7 @@ class Meal extends Model implements TranslatableContract
 
     public $translatedAttributes = ['title', 'description'];
 
-    public $fillable = ['status'];
+    protected $fillable = ['status'];
 
     public function category() {
         return $this->belongsTo(Category::class);
@@ -30,4 +31,11 @@ class Meal extends Model implements TranslatableContract
     public function ingredients() {
         return $this->belongsToMany(Ingredient::class, 'meal_ingredient', 'meal_id', 'ingredient_id');
     }
+
+    // accessor for state
+    public function getStatusAttribute() {
+        return "created";
+    }
+
+    protected $appends = ['status'];
 }

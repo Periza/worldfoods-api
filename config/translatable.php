@@ -15,7 +15,7 @@ return [
         'fr',
         'de',
         'it',
-        'hrv'
+        'hr'
     ],
 
     /*

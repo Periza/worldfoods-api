@@ -23,7 +23,9 @@ Route::get('/tags', function (Request $request) {
 });
 
 Route::get('/meals', function(Request $request) {
-
-    \App\Models\Meal::create(['title' => 'title', 'description' => 'description', 'status' => 'created']);
-    return Meal::all();
+    return $request;
 });
+
+Route::get('/example', function(Request $request) {
+    return ["data" => [Meal::first()->translate('en'), Meal::first()->translate('hr')]];
+;});

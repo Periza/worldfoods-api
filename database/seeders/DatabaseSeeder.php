@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TagSeeder::class);
         $this->call(MealSeeder::class);
         $this->call(PivotSeeder::class);
+        $this->call(LanguangeSeeder::class);
     }
 }
