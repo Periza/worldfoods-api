@@ -14,6 +14,8 @@ class Tag extends Model implements TranslatableContract
 
     protected $fillable = ['slug'];
 
+    protected $hidden = ['pivot', 'translations'];
+
     public $translatedAttributes = ['title'];
     public $timestamps = false;
 

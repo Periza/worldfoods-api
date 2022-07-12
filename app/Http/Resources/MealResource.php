@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Astrotomic\Tmdb\Facades\Tmdb;
 
 
 use Illuminate\Http\Request;
@@ -33,11 +34,15 @@ class MealResource extends JsonResource
             }
         }
 
+        // set locale
+
         
 
         return [
             'id' => $this->id,
-            'status' => $status
+            'status' => $status,
+            'category' => $this->category()->getResults()->translate(),
+            'tags' => $this->tags()->getResults()
         ];
     }
 }
