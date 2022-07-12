@@ -27,17 +27,15 @@ Route::get('/tags', function (Request $request) {
 
 Route::get('/meals', function(Request $request) {
 
-   /* $request->validate([
+    // validate request
+     $request->validate([
         'lang' => 'required',
-        'category' => 'nullable'
-    ]); */
+        'category' => 'null'
+    ]);
 
-    
-
-
-    return  new MealResource(Meal::first());
+    return  MealResource::collection(Meal::paginate());
         
-})->withTrashed();
+});
 
 Route::get('/', function(Request $request) {
     return "api";

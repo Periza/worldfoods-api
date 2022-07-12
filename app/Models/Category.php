@@ -42,12 +42,6 @@ class Category extends Model implements TranslatableContract
     public $translatedAttributes = ['title'];
     public $timestamps = false;
 
-    protected $appends = ['city_name'];
-    public function getCityNameAttribute()
-    {
-        $city_name = "markoffo";
-        return $city_name;
-    }
     
 }
 

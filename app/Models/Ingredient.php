@@ -18,6 +18,8 @@ class Ingredient extends Model implements TranslatableContract
 
     protected $fillable = ['slug'];
 
+    protected $hidden=['pivot', 'translations'];
+
     public function meals() {
         return $this->belongsToMany(Meal::class, 'meal_ingredient', 'ingredient_id', 'meal_id');
     }

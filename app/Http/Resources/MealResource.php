@@ -35,14 +35,15 @@ class MealResource extends JsonResource
         }
 
         // set locale
-
+        app()->setlocale('de');
         
 
         return [
             'id' => $this->id,
             'status' => $status,
-            'category' => $this->category()->getResults()->translate(),
-            'tags' => $this->tags()->getResults()
+            'category' => $this->category()->getResults(),
+            'tags' => $this->tags()->getResults(),
+            'ingredients' => $this->ingredients()->getResults()
         ];
     }
 }
