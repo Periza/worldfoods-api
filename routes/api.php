@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\MealResource;
 use App\Models\Tag;
 use App\Models\Meal;
 use Illuminate\Http\Request;
@@ -18,14 +19,23 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+
 Route::get('/tags', function (Request $request) {
     return Tag::all();
 });
 
 Route::get('/meals', function(Request $request) {
-    return $request;
+
+   /*  $request->validate([
+        'lang' => 'required',
+        'category' => 'nullable'
+    ]); */
+
+
+    return  MealResource::collection(Meal::paginate(10));
 });
 
-Route::get('/example', function(Request $request) {
-    return ["data" => [Meal::first()->translate('en'), Meal::first()->translate('hr')]];
+Route::get('/', function(Request $request) {
+    return "api";
 ;});

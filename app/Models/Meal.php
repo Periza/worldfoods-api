@@ -31,11 +31,4 @@ class Meal extends Model implements TranslatableContract
     public function ingredients() {
         return $this->belongsToMany(Ingredient::class, 'meal_ingredient', 'meal_id', 'ingredient_id');
     }
-
-    // accessor for state
-    public function getStatusAttribute() {
-        return "created";
-    }
-
-    protected $appends = ['status'];
 }
