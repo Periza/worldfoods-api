@@ -31,7 +31,7 @@ Route::get('/tags', function (Request $request) {
 Route::get('/meals', function(Request $request) {
 
     $validator = Validator::make($request->all(),[
-        'lang' => 'required',
+        'lang' => 'required|',
         'category' => 'null'
     ]);
 
@@ -39,7 +39,21 @@ Route::get('/meals', function(Request $request) {
         return response()->json($validator->errors());
     }
 
-    return  MealResource::collection(Meal::withTrashed()->paginate());
+    if($request->has('tags')) {
+        $tags = explode(',', $request->input('tags'));
+    }
+
+    $pagination = function() use ($request){
+        if($request->has('per_page')) {
+            return $request->input('per_page');
+        } else {
+            return 0;
+        }
+    };
+
+    
+
+    return  $request->has('diff_time') ? MealResource::collection(Meal::withTrashed()->paginate($pagination)) : MealResource::collection(Meal::paginate($pagination));
         
 });
 
