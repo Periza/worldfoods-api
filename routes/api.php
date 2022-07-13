@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Resources\MealResource;
 use App\Models\Tag;
 use App\Models\Meal;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Resources\MealResource;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +30,14 @@ Route::get('/tags', function (Request $request) {
 
 Route::get('/meals', function(Request $request) {
 
-    // validate request
-     $request->validate([
+    $validator = Validator::make($request->all(),[
         'lang' => 'required',
         'category' => 'null'
     ]);
+
+    if($validator->fails()) {
+        return response()->json($validator->errors());
+    }
 
     return  MealResource::collection(Meal::paginate());
         

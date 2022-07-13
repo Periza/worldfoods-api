@@ -12,6 +12,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class MealResource extends JsonResource
 {
+
+    /* public function __construct($resource) {
+        $this->pagination = [
+            'total' => $resource->total(),
+            'count' => $resource->count(),
+            'per_page' => $resource->perPage(),
+            'current_page' => $resource->currentPage(),
+            'total_pages' => $resource->lastPage()
+        ];
+
+        $resource = $resource->getCollection();
+
+        parent::__construct($resource);
+    } */
     /**
      * Transform the resource into an array.
      *
@@ -20,6 +34,8 @@ class MealResource extends JsonResource
      */
     public function toArray($request)
     {   
+
+
         $status = "created";
 
         $greaterThanDiffTime = function ($time) use($request) {
@@ -35,7 +51,8 @@ class MealResource extends JsonResource
         }
 
         // set locale
-        app()->setlocale('de');
+        app()->setlocale($request->lang);
+
         
 
         return [

@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
         $this->disableForeignKeys();
         // Truncate table
         $this->truncate('categories');
-        Category::factory()->count(20)->create();
+        Category::factory()->count(15)->create();
         $this->enableForeignKeys();
     }
 }

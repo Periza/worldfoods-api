@@ -30,7 +30,7 @@ class PivotSeeder extends Seeder
         // 
         Meal::all()->each(function (Meal $meal) use ($tag_count, $ingredient_count) {
             $attached = [];
-            foreach(range(1, random_int(random_int(1, $tag_count), $tag_count)) as $number) {
+            foreach(range(1, random_int(random_int(1, random_int(2, $tag_count)), $tag_count)) as $number) {
                 $random_int = random_int(1, $number);
                 if(in_array($random_int, $attached)) {
                     continue;
@@ -39,7 +39,7 @@ class PivotSeeder extends Seeder
                 array_push($attached, $random_int);
             }
 
-            foreach(range(1, random_int(random_int(1, $ingredient_count), $ingredient_count)) as $number) {
+            foreach(range(1, random_int(random_int(1, random_int(3, $ingredient_count)), $ingredient_count)) as $number) {
                 $random_int = random_int(1, $number);
                 if(in_array($random_int, $attached)) {
                     continue;
@@ -49,8 +49,5 @@ class PivotSeeder extends Seeder
             }
         });
 
-        
-        
-        // $meals->each(function(Meal $meal) {$meal->tags()->sync([1,2,3,4,5,6,7,8]);})
     }
 }
