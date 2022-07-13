@@ -39,7 +39,7 @@ Route::get('/meals', function(Request $request) {
         return response()->json($validator->errors());
     }
 
-    return  MealResource::collection(Meal::paginate());
+    return  MealResource::collection(Meal::withTrashed()->paginate());
         
 });
 
