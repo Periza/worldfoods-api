@@ -5,8 +5,11 @@ use App\Models\Meal;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Resources\MealResource;
+use App\Rules\InArray;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
+use Illumnate\Validation\Rule;
 
 
 /*
@@ -31,7 +34,7 @@ Route::get('/tags', function (Request $request) {
 Route::get('/meals', function(Request $request) {
 
     $validator = Validator::make($request->all(),[
-        'lang' => 'required|',
+        'lang' => ['required', new InArray],
         'category' => 'null'
     ]);
 
