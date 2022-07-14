@@ -58,9 +58,9 @@ class MealResource extends JsonResource
                 $tags = true;
             }
 
-        }
+        }        
 
-
+        
 
         return [
             'id' => $this->id,

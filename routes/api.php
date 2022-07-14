@@ -2,14 +2,17 @@
 
 use App\Models\Tag;
 use App\Models\Meal;
+use App\Rules\InArray;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illumnate\Validation\Rule;
 use App\Http\Resources\MealResource;
-use App\Rules\InArray;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
+use App\Http\Controllers\MealController;
 use Illuminate\Support\Facades\Validator;
-use Illumnate\Validation\Rule;
+use Illuminate\Contracts\Database\Query\Builder;
 
 
 /*
@@ -42,9 +45,6 @@ Route::get('/meals', function(Request $request) {
         return response()->json($validator->errors());
     }
 
-    if($request->has('tags')) {
-        $tags = explode(',', $request->input('tags'));
-    }
 
     $pagination = function() use ($request){
         if($request->has('per_page')) {
@@ -54,12 +54,24 @@ Route::get('/meals', function(Request $request) {
         }
     };
 
-    
+    $tags=[];
+    if($request->has('tags')) {
+        $tags = explode(',', $request->input('tags'));
+    }
 
-    return  $request->has('diff_time') ? MealResource::collection(Meal::withTrashed()->paginate($pagination)) : MealResource::collection(Meal::paginate($pagination));
-        
+    
+    
+    /* $selectedMeal =  $tags ? [] : $tags;
+
+    dd($selectedMeal); */
+
+    $query = Meal::with('tags');
+    foreach($tags as $tag) {
+        $query->whereHas('tags', function($q) use ($tag) {
+            $q->where('id', $tag);
+        });
+    }
+    
+    return $request->has('diff_time') ? MealResource::collection($query->withTrashed($pagination)->paginate()) : MealResource::collection($query->paginate());
 });
 
-Route::get('/', function(Request $request) {
-    return "api";
-;});
