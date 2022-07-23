@@ -11,6 +11,7 @@ use App\Http\Resources\MealResource;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\MealController;
+use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Database\Query\Builder;
 
@@ -34,17 +35,7 @@ Route::get('/tags', function (Request $request) {
     return Tag::all();
 });
 
-Route::get('/meals', function(Request $request) {
-
-    $validator = Validator::make($request->all(),[
-        'lang' => ['required', new InArray],
-        'category' => 'null'
-    ]);
-
-    if($validator->fails()) {
-        return response()->json($validator->errors());
-    }
-
+Route::get('/meals', function(MealRequest $request) {
 
     $pagination = function() use ($request){
         if($request->has('per_page')) {
