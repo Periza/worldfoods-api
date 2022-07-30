@@ -64,6 +64,8 @@ class MealResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
             'status' => $status,
             'category' => $this->when($category, $this->category()->getResults()),
             'tags' => $this->when($tags, $this->tags()->getResults()),
