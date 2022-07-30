@@ -26,7 +26,7 @@ class MealRequest extends FormRequest
     {
         return [
             'lang' => ['required', new InArray],
-            'category' => 'null'
+            'category' => 'nullable'
         ];
     }
 

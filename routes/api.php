@@ -35,34 +35,5 @@ Route::get('/tags', function (Request $request) {
     return Tag::all();
 });
 
-Route::get('/meals', function(MealRequest $request) {
-
-    $pagination = function() use ($request){
-        if($request->has('per_page')) {
-            return $request->input('per_page');
-        } else {
-            return 0;
-        }
-    };
-
-    $tags=[];
-    if($request->has('tags')) {
-        $tags = explode(',', $request->input('tags'));
-    }
-
-    
-    
-    /* $selectedMeal =  $tags ? [] : $tags;
-
-    dd($selectedMeal); */
-
-    $query = Meal::with('tags');
-    foreach($tags as $tag) {
-        $query->whereHas('tags', function($q) use ($tag) {
-            $q->where('id', $tag);
-        });
-    }
-    
-    return $request->has('diff_time') ? MealResource::collection($query->withTrashed($pagination)->paginate()) : MealResource::collection($query->paginate());
-});
+Route::get('/meals', [MealController::class, 'index']);
 

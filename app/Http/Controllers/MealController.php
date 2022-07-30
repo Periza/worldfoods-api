@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Meal;
 use Illuminate\Http\Request;
+use App\Http\Requests\MealRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\MealResource;
+use App\Filters\MealFilters;
 
 class MealController extends Controller
 {
@@ -13,9 +16,38 @@ class MealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(MealRequest $request, MealFilters $filters)
     {
-        return MealResource::collection(Meal::all());
+    $pagination = function() use ($request){
+        if($request->has('per_page')) {
+            return $request->input('per_page');
+        } else {
+            return 0;
+        }
+    };
+
+    // filter by tags if there are tags in the request
+    $tags=[];
+    if($request->has('tags')) {
+        $tags = explode(',', $request->input('tags'));
+    }
+
+    $query = Meal::with('tags');
+    foreach($tags as $tag) {
+        $query->whereHas('tags', function($q) use ($tag) {
+            return $q->where('id', $tag);
+        });
+    }
+
+    $mf = new MealFilters;
+    $query = $mf->apply($query);
+    
+    
+
+    $query = MealResource::collection($query->paginate());
+    return $query;
+    
+    return $request->has('diff_time') ? MealResource::collection($query->withTrashed($pagination)->paginate()) : MealResource::collection($query->paginate());
     }
 
     /**

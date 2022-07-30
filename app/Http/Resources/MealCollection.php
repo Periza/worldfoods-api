@@ -15,15 +15,8 @@ class MealCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+      return [
+        'data' => $this->collection
+      ];
     }
-
-    protected function preparePaginatedResponse($request) { 
-    if ($this->preserveAllQueryParameters) { 
-      $this->resource->appends($request->query()); 
-    } elseif (! is_null($this->queryParameters)) { 
-      $this->resource->appends($this->queryParameters); 
-    } 
-    return (new PaginatedMealResourceResponse($this))->toResponse($request); // Here we return our newly created Response 
-  }
 }
