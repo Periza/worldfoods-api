@@ -2,6 +2,7 @@
 namespace App\Filters;
 
 use App\Filters\CategoryFilter;
+use App\Filters\TagsFilter;
 
 class MealFilters {
     protected $filters = ['category' => CategoryFilter::class,

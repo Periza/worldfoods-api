@@ -25,22 +25,11 @@ class MealController extends Controller
             return 0;
         }
     };
+    
+    $query = Meal::query();
 
-    // filter by tags if there are tags in the request
-    $tags=[];
-    if($request->has('tags')) {
-        $tags = explode(',', $request->input('tags'));
-    }
-
-    $query = Meal::with('tags');
-    foreach($tags as $tag) {
-        $query->whereHas('tags', function($q) use ($tag) {
-            return $q->where('id', $tag);
-        });
-    }
-
-    $mf = new MealFilters;
-    $query = $mf->apply($query);
+    $filters->apply($query);
+    return MealResource::collection($query->paginate());
     
     
 
