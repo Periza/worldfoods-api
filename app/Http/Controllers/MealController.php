@@ -16,27 +16,14 @@ class MealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(MealRequest $request, MealFilters $filters)
+    public function index(MealRequest $request)
     {
-    $pagination = function() use ($request){
-        if($request->has('per_page')) {
-            return $request->input('per_page');
-        } else {
-            return 0;
-        }
-    };
     
+    $filters = new MealFilters;
     $query = Meal::query();
-
     $filters->apply($query);
-    return MealResource::collection($query->paginate());
-    
-    
 
-    $query = MealResource::collection($query->paginate());
-    return $query;
-    
-    return $request->has('diff_time') ? MealResource::collection($query->withTrashed($pagination)->paginate()) : MealResource::collection($query->paginate());
+    return MealResource::collection($query->paginate($request->input('per_page')));
     }
 
     /**

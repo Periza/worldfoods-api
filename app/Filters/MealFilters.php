@@ -6,7 +6,8 @@ use App\Filters\TagsFilter;
 
 class MealFilters {
     protected $filters = ['category' => CategoryFilter::class,
-                            'tags' => TagsFilter::class];
+                            'tags' => TagsFilter::class,
+                            'diff_time' => TrashedFilter::class];
 
     public function apply($query) {
         foreach($this->recievedFilters() as $name => $value) {

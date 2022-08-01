@@ -11,7 +11,7 @@ class TagsFilter {
                 return $q->where('id', $tag);
             });
         }
-
+        
         return $query;
 
         
