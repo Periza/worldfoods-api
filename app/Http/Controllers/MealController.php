@@ -8,6 +8,7 @@ use App\Http\Requests\MealRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\MealResource;
 use App\Filters\MealFilters;
+use App\Http\Resources\MealCollection;
 
 class MealController extends Controller
 {
@@ -20,10 +21,12 @@ class MealController extends Controller
     {
     
     $filters = new MealFilters;
+    
     $query = Meal::query();
     $filters->apply($query);
+    return new MealCollection($query->paginate($request->per_page)->withQueryString());
 
-    return MealResource::collection($query->paginate($request->input('per_page')));
+    return MealResource::collection($query->paginate($request->input('per_page'))->withQueryString());
     }
 
     /**
@@ -90,5 +93,6 @@ class MealController extends Controller
     public function destroy($id)
     {
         //
+        
     }
 }

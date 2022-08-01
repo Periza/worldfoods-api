@@ -2,21 +2,25 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Database\Eloquent\Collection;
 use App\Http\Resources\PaginatedMealResourceResponse;
+use App\Response\CustomPaginatedResourceResponse;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\ResourceResponse;
+use Illuminate\Pagination\AbstractPaginator;
 
 class MealCollection extends ResourceCollection
 {
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
-    public function toArray($request)
+    public function toResponse($request)
     {
-      return [
-        'data' => $this->collection
-      ];
+      $paginated = $this->resource->toArray();
+      return $this->resource instanceof AbstractPaginator 
+                  ? (new CustomPaginatedResourceResponse($this))->toResponse($request)
+                  : parent::toResponse($request);
+
     }
+    
+
 }
