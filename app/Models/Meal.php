@@ -16,7 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Meal extends Model implements TranslatableContract
 {
-    use HasFactory, SoftDeletes, Translatable;
+    use HasFactory;
+    use SoftDeletes;
+    use Translatable;
 
     public $translatedAttributes = ['title', 'description'];
 
@@ -34,5 +36,4 @@ class Meal extends Model implements TranslatableContract
     public function ingredients() : BelongsToMany {
         return $this->belongsToMany(Ingredient::class, 'meal_ingredient', 'meal_id', 'ingredient_id');
     }
-
 }

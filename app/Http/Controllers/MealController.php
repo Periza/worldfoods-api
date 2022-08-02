@@ -19,14 +19,13 @@ class MealController extends Controller
      */
     public function index(MealRequest $request)
     {
-    
-    $filters = new MealFilters;
+    $filters = new MealFilters();
     
     $query = Meal::query();
     $filters->apply($query);
+    
     return new MealCollection($query->paginate($request->per_page)->withQueryString());
 
-    return MealResource::collection($query->paginate($request->input('per_page'))->withQueryString());
     }
 
     /**

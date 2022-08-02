@@ -21,6 +21,4 @@ class MealCollection extends ResourceCollection
                   : parent::toResponse($request);
 
     }
-    
-
 }

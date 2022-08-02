@@ -10,7 +10,8 @@ use Astrotomic\Translatable\Translatable;
 
 class Tag extends Model implements TranslatableContract
 {
-    use HasFactory, Translatable;
+    use HasFactory;
+    use Translatable;
 
     protected $fillable = ['slug'];
 

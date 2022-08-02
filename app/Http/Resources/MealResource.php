@@ -20,8 +20,6 @@ class MealResource extends JsonResource
      */
     public function toArray($request)
     {   
-
-
         $status = "created";
 
         $greaterThanDiffTime = function ($time) use($request) {

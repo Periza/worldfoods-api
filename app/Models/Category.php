@@ -10,28 +10,10 @@ use Astrotomic\Translatable\Translatable;
 
 use function Symfony\Component\String\b;
 
-
-/* class Category extends Model implements TranslatableContract
-{
-    use HasFactory, Translatable;
-
-    protected $table = 'categories';
-
-    protected $fillable = ['slug', 'title'];
-
-    protected $hidden = ['pivot', 'translations'];
-
-    public $translatedAttributes = ['title'];
-    public $timestamps = false;
-
-    public function meals() {
-        return $this->hasMany(Meal::class);
-    }
-} */
-
 class Category extends Model implements TranslatableContract
 {
-    use HasFactory, Translatable;
+    use HasFactory;
+    use Translatable;
 
     protected $table = 'categories';
 
@@ -41,8 +23,6 @@ class Category extends Model implements TranslatableContract
 
     public $translatedAttributes = ['title'];
     public $timestamps = false;
-
-    
 }
 
 

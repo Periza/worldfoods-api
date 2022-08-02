@@ -10,9 +10,9 @@ use Astrotomic\Translatable\Translatable;
 
 class Ingredient extends Model implements TranslatableContract
 {
-    use HasFactory, Translatable;
+    use HasFactory;
+    use Translatable;
 
-    
     public $timestamps = false;
     public $translatedAttributes = ['title'];
 

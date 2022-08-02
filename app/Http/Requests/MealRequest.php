@@ -30,7 +30,8 @@ class MealRequest extends FormRequest
         ];
     }
 
-    public function messages() {
+    public function messages() 
+    {
         return [
             'lang.required' => 'The lang field is required'
         ];
